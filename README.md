@@ -4,24 +4,23 @@
 <p><strong>An example and educational implementation of RAFT using BERT, Chain of Thought and Few-Shot!</strong></p>
 <a href="https://arxiv.org/abs/2403.10131" target="_blank"><img src=https://img.shields.io/badge/arXiv-b5212f.svg?logo=arxiv></a>
 <a><img alt="Static Badge" src="https://img.shields.io/badge/made_with-Python-blue"></a>
+<a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a>
+<a href="http://makeapullrequest.com"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
+<a href="https://linkedin.com/in/jit2600"><img src="https://img.shields.io/badge/LinkedIn-Connect-blue" alt="LinkedIn"></a>
+<a href="https://twitter.com/stretchcloud"><img src="https://img.shields.io/twitter/follow/stretchcloud?label=Follow%20@stretchcloud&style=social" alt="Twitter"></a>
+<a href="https://github.com/stretchcloud/RAFT/stargazers"><img src="https://img.shields.io/github/stars/stretchcloud/RAFT?style=social" alt="GitHub Stars"></a>
+<a href="https://github.com/stretchcloud/RAFT/network/members"><img src="https://img.shields.io/github/forks/stretchcloud/RAFT?style=social" alt="GitHub Forks"></a>
+<a href="https://github.com/stretchcloud/RAFT/issues"><img src="https://img.shields.io/github/issues/stretchcloud/RAFT" alt="GitHub Issues"></a>
+<a href="https://github.com/stretchcloud/RAFT/pulls"><img src="https://img.shields.io/github/issues-pr/stretchcloud/RAFT" alt="GitHub Pull Requests"></a>
 </div>
-</p>
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/jit2600)
-[![Twitter](https://img.shields.io/twitter/follow/stretchcloud?label=Follow%20@stretchcloud&style=social)](https://twitter.com/stretchcloud)
-[![GitHub Stars](https://img.shields.io/github/stars/stretchcloud/RAFT?style=social)](https://github.com/stretchcloud/RAFT/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/stretchcloud/RAFT?style=social)](https://github.com/stretchcloud/RAFT/network/members)
-[![GitHub Issues](https://img.shields.io/github/issues/stretchcloud/RAFT)](https://github.com/stretchcloud/RAFT/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/stretchcloud/RAFT)](https://github.com/stretchcloud/RAFT/pulls)
 
 
-This repository contains three different implementations of the Retrieval-Augmented Fine-Tuning (RAFT) technique for question answering:
+This repository contains four different implementations of the Retrieval-Augmented Fine-Tuning (RAFT) technique for question answering:
 
 1. RAFT using BERT
 2. RAFT with Few-Shot Learning
-3. RAFT with Chain-of-Thought (CoT) Reasoning
+3. RAFT using FLAN-T5 model and Chain-of-Thought (CoT) Reasoning
+4. RAFT with BERT and Chain-of-Thought (CoT) Reasoning
 
 ## 1. RAFT using BERT
 
@@ -85,6 +84,36 @@ This implementation combines RAFT with Chain-of-Thought (CoT) reasoning using GP
 ### Usage
 Run `python raft-cot.py` to execute this implementation.
 
+## 4. RAFT with FLAN-T5 model and Chain-of-Thought (CoT) Reasoning
+
+![RAFT with BERT and Chain-of-Thought Technical Architecture](raft-cot-architecture.jpeg)
+
+### Summary
+This implementation combines RAFT using BERT with Chain-of-Thought (CoT) reasoning. It fine-tunes a FLAN-T5 model on a dataset of question-answer pairs with reasoning steps, using retrieved documents as context.
+
+### Steps
+1. Initialize the DocumentRetriever with a set of documents
+2. Prepare the dataset using RAFTCoTDataset, including reasoning steps
+3. Fine-tune the FLAN-T5 model using the prepared dataset
+4. Use the fine-tuned model to generate both reasoning and answers for new questions
+
+### Key Components
+- DocumentRetriever: Uses SentenceTransformer to encode documents and retrieve relevant ones
+- RAFTCoTDataset: Prepares the data for FLAN-T5 fine-tuning, including reasoning steps
+- train_raft_cot: Fine-tunes the FLAN-T5 model
+- generate_answer_cot: Uses the fine-tuned model to generate reasoning and answers in two steps
+
+### Architecture
+The architecture diagram illustrates the following components:
+- Document Retriever: Uses Sentence-BERT for embedding and cosine similarity for retrieval
+- FLAN-T5 Model: The core of the system, fine-tuned for QA and CoT reasoning
+- Training Data: Includes questions, contexts, answers, and reasoning steps
+- Fine-tuning Process: Uses AdamW optimizer and linear scheduler
+- Generation Process: Employs beam search and temperature sampling, implementing a two-step CoT approach
+
+### Usage
+Run `python raft-bert-cot.py` to execute this implementation.
+
 ## Comparison of Techniques
 
 1. RAFT using BERT:
@@ -95,9 +124,13 @@ Run `python raft-cot.py` to execute this implementation.
    - Pros: Requires less training data, more flexible for different types of questions
    - Cons: Relies on the quality of few-shot examples, may be less consistent
 
-3. RAFT with Chain-of-Thought (CoT) Reasoning:
+3. RAFT using FLAN-T5 model and Chain-of-Thought (CoT) Reasoning:
    - Pros: Provides detailed explanations, potentially more accurate for complex questions
    - Cons: May be slower due to generating longer responses, requires more powerful language model (GPT-4)
+
+4. RAFT with BERT and Chain-of-Thought (CoT) Reasoning:
+   - Pros: Combines the benefits of fine-tuning and CoT reasoning, potentially more accurate and faster than GPT-4 based approach
+   - Cons: Requires more complex training process, may need larger dataset for effective fine-tuning
 
 ## Requirements
 
@@ -105,7 +138,7 @@ Run `python raft-cot.py` to execute this implementation.
 - PyTorch
 - Transformers
 - SentenceTransformer
-- OpenAI API key (for Few-Shot and CoT implementations)
+- OpenAI API key (for Few-Shot and GPT-4 CoT implementations)
 
 ## Setup
 
