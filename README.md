@@ -1,4 +1,21 @@
-# RAFT Implementations
+# <div align="left">RAFT Implementation: Sample RAFT Implementation using BERT, CoT, Few-Shot<div>
+
+<div align="left">
+<p><strong>An example and educational implementation of RAFT using BERT, Chain of Thought and Few-Shot!</strong></p>
+<a href="https://arxiv.org/abs/2403.10131" target="_blank"><img src=https://img.shields.io/badge/arXiv-b5212f.svg?logo=arxiv></a>
+<a><img alt="Static Badge" src="https://img.shields.io/badge/made_with-Python-blue"></a>
+</div>
+</p>
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/jit2600)
+[![Twitter](https://img.shields.io/twitter/follow/stretchcloud?label=Follow%20@stretchcloud&style=social)](https://twitter.com/stretchcloud)
+[![GitHub Stars](https://img.shields.io/github/stars/stretchcloud/RAFT?style=social)](https://github.com/stretchcloud/RAFT/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/stretchcloud/RAFT?style=social)](https://github.com/stretchcloud/RAFT/network/members)
+[![GitHub Issues](https://img.shields.io/github/issues/stretchcloud/RAFT)](https://github.com/stretchcloud/RAFT/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/stretchcloud/RAFT)](https://github.com/stretchcloud/RAFT/pulls)
+
 
 This repository contains three different implementations of the Retrieval-Augmented Fine-Tuning (RAFT) technique for question answering:
 
